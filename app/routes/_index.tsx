@@ -1,4 +1,5 @@
 import type { MetaFunction } from "@remix-run/deno";
+import { useLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -7,7 +8,14 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+// loader function
+export function loader() {
+  return { date: new Date() };
+}
+
 export default function Index() {
+  const { date } = useLoaderData<typeof loader>();
+  console.log(date);
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
       <h1>Welcome to Remix</h1>
